@@ -2,7 +2,10 @@ require(synapseClient)
 synapseLogin()
 require(rSynapseUtilities)
 
-permLink =githubr::getPermlink('blogsdon/annotationsProvenance','annoProvenance.R')
+permLink =githubr::getPermlink('blogsdon/annotationsProvenance',
+                               'annoProvenance.R',
+                               ref = 'branch',
+                               refName = 'dev')
 
 parentDf <- data.frame(foo = rnorm(20),
                      bar = rnorm(20),
@@ -12,6 +15,7 @@ View(parentDf)
 dummyAnno <- list(a = 'b', 
                   c = 'd',
                   e = 'f')
+dummyAnno <- c(dummyAnno2,setNames(list('executed'),permLink))
 
 parentDfObj <- rSynapseUtilities::pushDf2Synapse(parentDf,
                               'parentDf.csv',
@@ -22,8 +26,10 @@ onWeb(parentDfObj)
 
 dummyAnno1 <- list(a = 'b', 
                    c= 'd', 
-                   e = 'f',
-                   used = synapseClient::synGetProperties(parentDfObj)$id)
+                   e = 'f')
+dummyAnno1 <- c(dummyAnno1,setNames(list('used'),synapseClient::synGetProperties(parentDfObj)$id))
+dummyAnno1 <- c(dummyAnno1,setNames(list('executed'),permLink))
+
 childDf1 <- data.frame(foo = rnorm(20),
                        bar = rnorm(20),
                        baz = rnorm(20),
