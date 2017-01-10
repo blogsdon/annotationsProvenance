@@ -1,6 +1,9 @@
 require(synapseClient)
 synapseLogin()
 require(rSynapseUtilities)
+
+permLink =githubr::getPermlink('blogsdon/annotationsProvenance','annoProvenance.R')
+
 parentDf <- data.frame(foo = rnorm(20),
                      bar = rnorm(20),
                      baz = rnorm(20),
