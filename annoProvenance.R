@@ -15,7 +15,7 @@ View(parentDf)
 dummyAnno <- list(a = 'b', 
                   c = 'd',
                   e = 'f')
-dummyAnno <- c(dummyAnno2,setNames(list('executed'),permLink))
+dummyAnno <- c(dummyAnno2,setNames(list('executed'),paste(memCompress(permLink),collapse='')))
 
 parentDfObj <- rSynapseUtilities::pushDf2Synapse(parentDf,
                               'parentDf.csv',
@@ -28,7 +28,7 @@ dummyAnno1 <- list(a = 'b',
                    c= 'd', 
                    e = 'f')
 dummyAnno1 <- c(dummyAnno1,setNames(list('used'),synapseClient::synGetProperties(parentDfObj)$id))
-dummyAnno1 <- c(dummyAnno1,setNames(list('executed'),permLink))
+dummyAnno1 <- c(dummyAnno1,setNames(list('executed'),paste(memCompress(permLink),collapse='')))
 
 childDf1 <- data.frame(foo = rnorm(20),
                        bar = rnorm(20),
@@ -46,6 +46,7 @@ dummyAnno2 <- list(a = 'b',
                    e = 'f')
 dummyAnno2 <- c(dummyAnno2,setNames(list('used'),synapseClient::synGetProperties(parentDfObj)$id))
 dummyAnno2 <- c(dummyAnno2,setNames(list('used'),synapseClient::synGetProperties(childDf1Obj)$id))
+dummyAnno2 <- c(dummyAnno2,setNames(list('executed'),paste(memCompress(permLink),collapse='')))
 
 childDf2 <- data.frame(foo = rnorm(20),
                        bar = rnorm(20),
